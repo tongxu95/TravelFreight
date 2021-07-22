@@ -28,7 +28,7 @@ function LoginScreen( {navigation} ) {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <StyledImageBackground
-                imageStyle={{ opacity: 0.4 }}
+                imageStyle={{ opacity: 0.35 }}
                 source={require('../assets/background.jpg')}
             >
                 <SubTitle>Login</SubTitle>
@@ -65,7 +65,7 @@ function LoginScreen( {navigation} ) {
                                         <TextLink onPress={handleSubmit}>Forgot Password?</TextLink>
                                     </TouchableOpacity>
                                 </PWRecoveryView>
-                                <StyledButton>
+                                <StyledButton disabled={ disableButton(values) }>
                                     <ButtonText onPress={handleSubmit}>Login</ButtonText>
                                 </StyledButton>
                                 <Line />
@@ -127,6 +127,10 @@ const MyTextInput = ({ icon, isPassword, hidePassword, setHidePassword, ...props
             )}
         </View>
     );
+};
+
+const disableButton = (values) => {
+    return (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()) || values.password.trim().length < 8);
 };
 
 export default LoginScreen;

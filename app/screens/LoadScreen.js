@@ -1,11 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import { Animated, View } from 'react-native';
+import { Animated } from 'react-native';
 
 import {
-    StyledImageBackground,
     LogoContainer,
     Logo,
-    Slogan,
 } from '../config/styles';
 
 function LoadScreen(props) {

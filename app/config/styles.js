@@ -20,13 +20,6 @@ export const Logo = styled.Image`
     height: 250px;
 `;
 
-export const Slogan = styled.Text`
-    font-size: 16px;
-    font-style: italic;
-    padding-bottom: 40px;
-    color: ${colors.primary};
-`;
-
 export const SubTitle = styled.Text`
     fontSize: 20px;
     letter-spacing: 0.5px;
@@ -71,7 +64,8 @@ export const StyledButton = styled.TouchableOpacity`
     height: 60px;
     justify-content: center;
     align-items: center;
-    background-color: ${colors.secondary};
+    
+    background-color: ${props => props.disabled ? colors.lightgrey : colors.secondary}
 `;
 
 export const ButtonText = styled.Text`
@@ -123,8 +117,18 @@ export const TextLink = styled.Text`
 
 export const TermsNConditions = styled.View`
     flex-direction: row;
+    margin-top: 25px;
+    margin-bottom: 15px;
+`;
+
+export const PWContainer = styled.View`
     margin-top: -10px;
-    margin-bottom: 20px;
+`;
+
+export const PWRequirment = styled.Text`
+    color: ${colors.red};
+    font-size: 16px;
+    font-weight: bold;
 `;
 
 export const AgreementContainer = styled.View`

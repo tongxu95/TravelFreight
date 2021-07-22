@@ -17,6 +17,8 @@ import {
     OtherView,
     TextLink,
     TermsNConditions,
+    PWContainer,
+    PWRequirment,
     AgreementContainer
 } from '../config/styles';
 
@@ -26,11 +28,12 @@ function RegisterScreen( {navigation} ) {
 
     const [hidePassword, setHidePassword] = useState(true);
     const [toggleCheckBox, setToggleCheckBox] = useState(false);
+    const [showPWReq, setShowPWReq] = useState(false);
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <StyledImageBackground
-                imageStyle={{ opacity: 0.4 }}
+                imageStyle={{ opacity: 0.35 }}
                 source={require('../assets/background.jpg')}
             >
                 <SubTitle>Sign Up</SubTitle>
@@ -47,6 +50,7 @@ function RegisterScreen( {navigation} ) {
                                         placeholderTextColor={colors.grey}
                                         onChangeText={handleChange('username')}
                                         onBlur={handleBlur('username')}
+                                        onFocus={() => setShowPWReq(false)}
                                         value={values.username}
                                     />
                                     <MyTextInput
@@ -54,6 +58,7 @@ function RegisterScreen( {navigation} ) {
                                         placeholder='Email Address'
                                         placeholderTextColor={colors.grey}
                                         onChangeText={handleChange('email')}
+                                        onFocus={() => setShowPWReq(false)}
                                         onBlur={handleBlur('email')}
                                         value={values.email}
                                         keyboardType='email-address'
@@ -64,12 +69,18 @@ function RegisterScreen( {navigation} ) {
                                         placeholderTextColor={colors.grey}
                                         onChangeText={handleChange('password')}
                                         onBlur={handleBlur('password')}
+                                        onFocus={() => setShowPWReq(true)}
                                         value={values.password}
                                         secureTextEntry={hidePassword}
                                         isPassword={true}
                                         hidePassword={hidePassword}
                                         setHidePassword={setHidePassword}
                                     />
+                                    {showPWReq && (
+                                        <PWContainer>
+                                            <PWRequirment>Needs at least 8 characters</PWRequirment>
+                                        </PWContainer>
+                                    )}
                                     <TermsNConditions>
                                         <TouchableOpacity onPress={() => setToggleCheckBox(!toggleCheckBox)}>
                                             <Fontisto
@@ -89,7 +100,7 @@ function RegisterScreen( {navigation} ) {
                                             </TouchableOpacity>
                                         </AgreementContainer>
                                     </TermsNConditions>
-                                    <StyledButton>
+                                    <StyledButton disabled={ disableButton(values) }>
                                         <ButtonText onPress={handleSubmit}>Sign Up</ButtonText>
                                     </StyledButton>
                                     <Line />
@@ -133,6 +144,10 @@ const MyTextInput = ({ icon, isPassword, hidePassword, setHidePassword, ...props
             )}
         </View>
     );
+};
+
+const disableButton = (values) => {
+    return (values.username.trim() == '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()) || values.password.trim().length < 8);
 };
 
 export default RegisterScreen;
