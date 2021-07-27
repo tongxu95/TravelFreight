@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { ActivityIndicator, Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { Formik } from 'formik';
 import { Octicons, FontAwesome } from '@expo/vector-icons';
 
@@ -11,6 +11,7 @@ import {
     StyledTextInput,
     LeftIcon,
     RightIcon,
+    MessageBox,
     StyledButton,
     ButtonText,
     Line,
@@ -21,9 +22,40 @@ import {
     TextLink
 } from '../config/styles';
 
+// API client
+import axios from 'axios';
+
+
 function LoginScreen( {navigation} ) {
 
     const [hidePassword, setHidePassword] = useState(true);
+    const [message, setMessage] = useState();
+    const [messageType, setMessageType] = useState();
+
+    const handleLogin = (credentials, setSubmitting) => {
+        handleMessage(null);
+        const url = 'https://secret-cove-40177.herokuapp.com/user/signin';
+
+        axios.post(url, credentials).then((response) => {
+            const {status, message, data} = response.data;
+            console.log(response.data);
+            if (status != 'SUCCESSFUL') {
+                handleMessage(message, status);
+                setSubmitting(false);
+            } else {
+                navigation.navigate('Profile', {...data[0]});
+            }
+        }).catch(err =>{
+            console.log(err);
+            setSubmitting(false);
+            handleMessage('An error occurred. Check you network and try again!');
+        })
+    };
+
+    const handleMessage = (message, type = 'FAILED') => {
+        setMessage(message);
+        setMessageType(type);
+    }
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -34,9 +66,11 @@ function LoginScreen( {navigation} ) {
                 <SubTitle>Login</SubTitle>
                 <Formik
                     initialValues={{ email: '', password: '' }}
-                    onSubmit={(values) => console.log(values)}
+                    onSubmit={(values, {setSubmitting}) => {
+                        handleLogin(values, setSubmitting);
+                    }}
                 >
-                    {({ handleChange, handleBlur, handleSubmit, values }) => (
+                    {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                             <FormContainer>
                                 <MyTextInput
@@ -65,9 +99,18 @@ function LoginScreen( {navigation} ) {
                                         <TextLink onPress={handleSubmit}>Forgot Password?</TextLink>
                                     </TouchableOpacity>
                                 </PWRecoveryView>
-                                <StyledButton disabled={ disableButton(values) }>
-                                    <ButtonText onPress={handleSubmit}>Login</ButtonText>
-                                </StyledButton>
+                                {messageType == 'FAILED' && <MessageBox type={messageType}>{message}</MessageBox>}
+                                {!isSubmitting && <StyledButton 
+                                    disabled={ disableButton(values) }
+                                    onPress={handleSubmit}
+                                >
+                                    <ButtonText>Login</ButtonText>
+                                </StyledButton >}
+                                {isSubmitting && <StyledButton disabled={true}>
+                                    <ActivityIndicator 
+                                        size='large' 
+                                        color={colors.white} />
+                                </StyledButton>}
                                 <Line />
                                 <ThirdPartyContainer>
                                     <ThirdPartyButton onPress={handleSubmit}>

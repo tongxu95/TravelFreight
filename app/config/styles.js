@@ -58,6 +58,13 @@ export const RightIcon = styled.TouchableOpacity`
     z-index: 1; 
 `;
 
+export const MessageBox = styled.Text`
+    color: ${colors.red};
+    font-size: 15px;
+    text-align: center;
+    padding-bottom: 10px;
+`;
+
 export const StyledButton = styled.TouchableOpacity`
     border-radius: 5px;
     margin-bottom: 10px;
@@ -117,12 +124,13 @@ export const TextLink = styled.Text`
 
 export const TermsNConditions = styled.View`
     flex-direction: row;
-    margin-top: 25px;
+    margin-top: -10px;
     margin-bottom: 15px;
 `;
 
 export const PWContainer = styled.View`
     margin-top: -10px;
+    padding-bottom: 25px;
 `;
 
 export const PWRequirment = styled.Text`
