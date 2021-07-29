@@ -144,3 +144,43 @@ export const AgreementContainer = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
 `;
+
+export const ProfileView = styled.SafeAreaView`
+    margin-horizontal: 20px;
+    flex-direction: row;
+`;
+
+export const UsernameView = styled.View`
+    margin: 20px;
+`;
+
+export const UserInfoView = styled.View`
+    margin-top: 30px;
+    margin-bottom: -15px;
+    margin-left: 40px;
+    flex-direction: row;
+    align-items: center;
+`;
+
+export const UserInfoText = styled.Text`
+    padding-left: 25px;
+    font-size: 18px;
+    color: ${props => props.isEmpty ? colors.lightgrey : colors.primary}
+`;
+
+export const SettingView = styled.View`
+    flex: 1;
+    flex-direction: row-reverse;
+    margin-vertical: 20px;
+`;
+
+export const EditView = styled.View`
+    flex: 1;
+    flex-direction: row-reverse;
+    margin-left: 40px;
+`;
+
+export const EditText = styled.Text`
+    color: ${colors.tertiery};
+    font-size: 18px;
+`;

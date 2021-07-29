@@ -27,7 +27,7 @@ import axios from 'axios';
 
 // need to check uniqueness of username
 
-function RegisterScreen( {navigation} ) {
+function RegisterScreen({ navigation }) {
 
     const [hidePassword, setHidePassword] = useState(true);
     const [toggleCheckBox, setToggleCheckBox] = useState(false);
@@ -52,16 +52,16 @@ function RegisterScreen( {navigation} ) {
             }).catch(err =>{
                 console.log(err);
                 setSubmitting(false);
-                handleMessage('An error occurred. Check you network and try again!');
+                handleMessage('An error occurred. Check you network and try again!', 'FAILED');
             })    
         } else {
-            handleMessage('Please review and agree to our terms and privacy policy!');
+            handleMessage('Please review and agree to our terms and privacy policy!', 'FAILED');
             setSubmitting(false);
         }
 
     };
 
-    const handleMessage = (message, type = 'FAILED') => {
+    const handleMessage = (message, type) => {
         setMessage(message);
         setMessageType(type);
     }

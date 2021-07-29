@@ -26,7 +26,7 @@ import {
 import axios from 'axios';
 
 
-function LoginScreen( {navigation} ) {
+function LoginScreen({ navigation }) {
 
     const [hidePassword, setHidePassword] = useState(true);
     const [message, setMessage] = useState();
@@ -38,7 +38,6 @@ function LoginScreen( {navigation} ) {
 
         axios.post(url, credentials).then((response) => {
             const {status, message, data} = response.data;
-            console.log(response.data);
             if (status != 'SUCCESSFUL') {
                 handleMessage(message, status);
                 setSubmitting(false);
@@ -48,11 +47,11 @@ function LoginScreen( {navigation} ) {
         }).catch(err =>{
             console.log(err);
             setSubmitting(false);
-            handleMessage('An error occurred. Check you network and try again!');
+            handleMessage('An error occurred. Check you network and try again!', 'FAILED');
         })
     };
 
-    const handleMessage = (message, type = 'FAILED') => {
+    const handleMessage = (message, type) => {
         setMessage(message);
         setMessageType(type);
     }
