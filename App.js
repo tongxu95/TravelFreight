@@ -11,11 +11,11 @@ export default function App() {
   return (
     <NavigationContainer>
 
-      {/* <MyTabs /> */}
+      <MyTabs />
 
       {/* <LoadScreen /> */}
 
-      <ProfileScreen/> 
+      {/* <ProfileScreen/>  */}
     </NavigationContainer>
   );
 }

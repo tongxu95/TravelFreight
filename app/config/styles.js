@@ -157,15 +157,16 @@ export const UsernameView = styled.View`
 export const UserInfoView = styled.View`
     margin-top: 30px;
     margin-bottom: -15px;
-    margin-left: 40px;
+    margin-left: 10%;
     flex-direction: row;
     align-items: center;
+    width: 80%;
 `;
 
 export const UserInfoText = styled.Text`
-    padding-left: 25px;
+    margin-left: 25px;
+    margin-right: 10px;
     font-size: 18px;
-    color: ${props => props.isEmpty ? colors.lightgrey : colors.primary}
 `;
 
 export const SettingView = styled.View`
@@ -177,10 +178,23 @@ export const SettingView = styled.View`
 export const EditView = styled.View`
     flex: 1;
     flex-direction: row-reverse;
-    margin-left: 40px;
 `;
 
 export const EditText = styled.Text`
     color: ${colors.tertiery};
     font-size: 18px;
+`;
+
+export const AddProfileImage = styled.View`
+    flex-direction: column-reverse;
+    margin-left: -20px;
+`;
+
+export const Loading = styled.ActivityIndicator`
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    backgroundColor: rgba(0,0,0,0.6);
 `;
