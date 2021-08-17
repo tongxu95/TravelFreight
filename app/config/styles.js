@@ -87,7 +87,7 @@ export const ButtonText = styled.Text`
 export const Line = styled.View`
     border-bottom-color: ${colors.darkGrey};
     border-bottom-width: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 `;
 
 export const ThirdPartyContainer = styled.View`
@@ -197,4 +197,43 @@ export const Loading = styled.ActivityIndicator`
     top: 0px;
     bottom: 0px;
     backgroundColor: rgba(0,0,0,0.6);
+`;
+
+export const SettingsHeader = styled.View`
+    flex-direction: row;
+    padding-horizontal: 10px;
+`;
+
+export const SettingsBackground = styled.SafeAreaView`
+    background-color: ${colors.whitegrey};
+    flex: 1;
+`;
+
+export const GroupLayout = styled.View`
+    margin-top: 10px;
+    background-color: ${colors.white};
+`;
+
+export const SettingsLayout = styled.TouchableOpacity`
+    flex-direction: row;
+    margin-vertical: 15px;
+    padding-horizontal: 20px;
+    
+`;
+
+export const Divider = styled.View`
+    border-bottom-color: ${colors.whitegrey};
+    border-bottom-width: 1px;
+`;
+
+export const SettingsText = styled.Text`
+    padding-horizontal: 40px;
+    font-size: 18px;
+    color: ${colors.primary};
+    text-align: center;
+`;
+
+export const LogoutContainer = styled.TouchableOpacity`
+    align-items: center;
+    margin-vertical: 15px;
 `;

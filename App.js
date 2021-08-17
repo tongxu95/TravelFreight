@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import LoadScreen from './app/screens/LoadScreen';
 import ProfileScreen from './app/screens/ProfileScreen';
+import SettingsScreen from './app/screens/SettingsScreen';
 import MyTabs from './app/navigation/Tabs';
 
 
@@ -16,6 +17,8 @@ export default function App() {
       {/* <LoadScreen /> */}
 
       {/* <ProfileScreen/>  */}
+
+      {/* <SettingsScreen/> */}
     </NavigationContainer>
   );
 }
