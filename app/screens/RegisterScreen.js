@@ -35,7 +35,7 @@ function RegisterScreen({ navigation }) {
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
 
-    const handleSignup = (credentials, setSubmitting) => {
+    const handleSignup = (credentials, setSubmitting, resetForm) => {
         handleMessage(null);
         const url = 'https://secret-cove-40177.herokuapp.com/user/signup';
 
@@ -48,6 +48,8 @@ function RegisterScreen({ navigation }) {
                     setSubmitting(false);
                 } else {
                     navigation.navigate('Profile', {...data});
+                    setSubmitting(false);
+                    resetForm({ values: '' });
                 }
             }).catch(err =>{
                 console.log(err);
@@ -74,8 +76,8 @@ function RegisterScreen({ navigation }) {
                 <SubTitle>Sign Up</SubTitle>
                 <Formik 
                     initialValues={{ username: '', email: '', password: '' }}
-                    onSubmit={(values, {setSubmitting}) => {
-                        handleSignup(values, setSubmitting);
+                    onSubmit={(values, {setSubmitting, resetForm}) => {
+                        handleSignup(values, setSubmitting, resetForm);
                     }}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (

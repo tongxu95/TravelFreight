@@ -32,7 +32,7 @@ function LoginScreen({ navigation }) {
     const [message, setMessage] = useState();
     const [messageType, setMessageType] = useState();
 
-    const handleLogin = (credentials, setSubmitting) => {
+    const handleLogin = (credentials, setSubmitting, resetForm) => {
         handleMessage(null);
         const url = 'https://secret-cove-40177.herokuapp.com/user/signin';
 
@@ -43,6 +43,8 @@ function LoginScreen({ navigation }) {
                 setSubmitting(false);
             } else {
                 navigation.navigate('Profile', {...data[0]});
+                setSubmitting(false);
+                resetForm({ values: '' });
             }
         }).catch(err =>{
             console.log(err);
@@ -65,8 +67,8 @@ function LoginScreen({ navigation }) {
                 <SubTitle>Login</SubTitle>
                 <Formik
                     initialValues={{ email: '', password: '' }}
-                    onSubmit={(values, {setSubmitting}) => {
-                        handleLogin(values, setSubmitting);
+                    onSubmit={(values, {setSubmitting, resetForm}) => {
+                        handleLogin(values, setSubmitting, resetForm);
                     }}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (
@@ -95,7 +97,7 @@ function LoginScreen({ navigation }) {
                                 />
                                 <PWRecoveryView>
                                     <TouchableOpacity>
-                                        <TextLink onPress={handleSubmit}>Forgot Password?</TextLink>
+                                        <TextLink>Forgot Password?</TextLink>
                                     </TouchableOpacity>
                                 </PWRecoveryView>
                                 {messageType == 'FAILED' && <MessageBox type={messageType}>{message}</MessageBox>}
