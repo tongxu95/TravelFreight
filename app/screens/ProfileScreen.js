@@ -1,9 +1,10 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import { Alert, TouchableOpacity, View } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import colors from '../config/colors';
 import {
@@ -34,6 +35,11 @@ function ProfileScreen({ navigation, route} ) {
 
     const [isLoading, setIsLoading] = useState(false);
 
+    useEffect(() => {
+        const jsonValue = JSON.stringify(route.params);
+        AsyncStorage.setItem('@user', jsonValue);
+    });
+
     const addProfileImage = async () => {
         setIsLoading(true);
         await pickImage();
@@ -56,26 +62,45 @@ function ProfileScreen({ navigation, route} ) {
         });
 
         if (!result.cancelled) {
-            const profileImg = result.uri;
-            const url = 'https://secret-cove-40177.herokuapp.com/user/update/img';
-
-            const update = {
-                _id: _id,
-                img: profileImg
-            };
-
-            axios.post(url, update).then((response) => {
-                const {status, message} = response.data;
-                if (status != 'SUCCESS') {
-                    console.log(message, status);
-                } 
-            }).catch(err =>{
-                console.log(err);
-            })
-
-            setImage(profileImg);
+            uploadProfileImage(result.uri);
+            setImage(result.uri);
         }
     };
+
+    const uploadProfileImage = (uri) => {
+        const uriParts = uri.split('.');
+        const fileType = uriParts[uriParts.length - 1];
+        // const apiUrl = 'https://secret-cove-40177.herokuapp.com/user/update/img';
+        const apiUrl = 'http://localhost:3000/user/update/img';
+
+        const formData = new FormData();
+        formData.append('img', {
+            uri: uri,
+            name: `profile.${fileType}`,
+            type: `image/${fileType}`,
+        });
+
+        const update = {
+            _id,
+            formData
+        };
+
+        const headers = {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+        };
+
+        axios.post(apiUrl, update, {
+            headers: headers
+        }).then((response) => {
+            const {status, message} = response.data;
+            if (status != 'SUCCESS') {
+                console.log(message, status);
+            } 
+        }).catch(err =>{
+            console.log(err);
+        })
+    }
 
 
     const addLoc = async () => {

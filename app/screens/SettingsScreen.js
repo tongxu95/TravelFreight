@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AntDesign, FontAwesome, Ionicons } from '@expo/vector-icons';
 
 import colors from '../config/colors';
@@ -67,7 +68,10 @@ function SettingsScreen( {navigation} ) {
                 </SettingsLayout>
             </GroupLayout>
             <GroupLayout>
-                <LogoutContainer onPress={() => navigation.navigate('Login')}>
+                <LogoutContainer onPress={() => {
+                    navigation.navigate('Login');
+                    AsyncStorage.removeItem('@user');
+                }}>
                     <SettingsText>Log Out</SettingsText>
                 </LogoutContainer>
             </GroupLayout>
