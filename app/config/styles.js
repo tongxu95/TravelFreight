@@ -30,7 +30,7 @@ export const SubTitle = styled.Text`
 
 export const FormContainer = styled.View`
     width: 80%;
-    height: 50%;
+    height: 100%;
 `;
 
 export const StyledTextInput = styled.TextInput`
@@ -62,11 +62,12 @@ export const MessageBox = styled.Text`
     color: ${colors.red};
     font-size: 15px;
     text-align: center;
-    padding-bottom: 10px;
+    margin-bottom: -5px;
 `;
 
 export const StyledButton = styled.TouchableOpacity`
     border-radius: 5px;
+    margin-top: 15px;
     margin-bottom: 10px;
     height: 60px;
     justify-content: center;
@@ -113,9 +114,8 @@ export const OtherView = styled.View`
 
 export const PWRecoveryView = styled.View`
     flex-direction: row-reverse;  
-    margin-top: 5px;  
     margin-top: -15px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 `;
 
 export const TextLink = styled.Text`
@@ -236,4 +236,52 @@ export const SettingsText = styled.Text`
 export const LogoutContainer = styled.TouchableOpacity`
     align-items: center;
     margin-vertical: 15px;
+`;
+
+export const PostContainer = styled.SafeAreaView`
+    flex: 1;
+    align-items: center;
+`;
+
+export const StyledLabel = styled.Text`
+    font-size: 18px;
+    color: ${colors.primary};
+    margin-bottom: 5px;
+`;
+
+export const SingleLineInput = styled.TextInput`
+    backgroundColor: ${colors.white};
+    border-radius: 5px;
+    padding-horizontal: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    height: 40px;
+    color: ${colors.primary};
+`;
+
+export const MultiLineInput = styled.TextInput`
+    backgroundColor: ${colors.white};
+    border-radius: 5px;
+    padding-horizontal: 15px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    height: 150px;
+    flex-wrap: wrap;
+    color: ${colors.primary};
+`;
+
+export const CategoryContainer = styled.View`
+    flex-direction: row;
+    backgroundColor: ${colors.white};
+    border-radius: 5px;
+    height: 60px;
+    margin-bottom: 15px;
+`;
+
+export const CategoryText = styled.Text`
+    padding-left: 30px;
+    top: 20px;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    color: ${colors.primary};
 `;

@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import LoginStack from './LoginStack';
+import PostStack from './PostStack';
 import FindScreen from '../screens/FindScreen';
-import PostScreen from '../screens/PostScreen';
 import FavScreen from '../screens/FavScreen';
 import ChatScreen from '../screens/ChatScreen';
 import colors from '../config/colors'
@@ -42,7 +42,7 @@ function MyTabs() {
     >    
       <Tab.Screen name="Explore" component={FindScreen} />
       <Tab.Screen name="Favorite" component={FavScreen} />
-      <Tab.Screen name="Post" component={PostScreen} />
+      <Tab.Screen name="Post" component={PostStack} />
       <Tab.Screen name="Chat" component={ChatScreen} />
       <Tab.Screen name="Home" component={LoginStack} />    
     </Tab.Navigator>
