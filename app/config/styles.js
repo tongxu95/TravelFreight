@@ -67,8 +67,7 @@ export const MessageBox = styled.Text`
 
 export const StyledButton = styled.TouchableOpacity`
     border-radius: 5px;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    margin-vertical: 15px;
     height: 60px;
     justify-content: center;
     align-items: center;
@@ -88,7 +87,6 @@ export const ButtonText = styled.Text`
 export const Line = styled.View`
     border-bottom-color: ${colors.darkGrey};
     border-bottom-width: 1px;
-    margin-bottom: 15px;
 `;
 
 export const ThirdPartyContainer = styled.View`
@@ -98,7 +96,7 @@ export const ThirdPartyContainer = styled.View`
 
 export const ThirdPartyButton = styled.TouchableOpacity`
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-vertical: 10px;
     height: 60px;
     width: 45%;
     flex-direction: row;
@@ -284,4 +282,30 @@ export const CategoryText = styled.Text`
     font-size: 20px;
     letter-spacing: 0.5px;
     color: ${colors.primary};
+`;
+
+export const JoinCommContainer = styled.SafeAreaView`
+    flex: 1;
+    top: 100px;
+    align-items: center;
+`;
+
+export const Pitch = styled.Text`
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 40px;
+`;
+
+export const GoBackContainer = styled.View`
+    margin-top: 200px;
+    align-items: center;
+`;
+
+export const GoBackButton = styled.TouchableOpacity`
+    height: 60px;
+    width: 60px;
+    border-radius: 40px;
+    justify-content: center;
+    align-items: center;
+    background-color: ${colors.lightgrey}
 `;

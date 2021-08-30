@@ -1,24 +1,27 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import LoadScreen from './app/screens/LoadScreen';
-import ProfileScreen from './app/screens/ProfileScreen';
-import SettingsScreen from './app/screens/SettingsScreen';
 import MyTabs from './app/navigation/Tabs';
+import JoinCommStack from './app/navigation/JoinCommStack';
 
+const Stack = createStackNavigator();
 
 export default function App() {
 
   return (
     <NavigationContainer>
+      
+      <Stack.Navigator 
+            screenOptions={{
+            headerShown: false,
+            }}
+            initialRouteName='Tabs'
+        >
+            <Stack.Screen name='Tabs' component={MyTabs} />
+            <Stack.Screen name='Join Community' component={JoinCommStack} />
+        </Stack.Navigator>
 
-      <MyTabs />
-
-      {/* <LoadScreen /> */}
-
-      {/* <ProfileScreen/>  */}
-
-      {/* <SettingsScreen/> */}
     </NavigationContainer>
   );
 }

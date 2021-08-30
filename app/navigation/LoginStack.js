@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationActions } from 'react-navigation';
 
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
@@ -16,11 +17,9 @@ function LoginStack() {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="TransitionLogin"
+        initialRouteName="Transition"
       >
         <Stack.Screen name='Transition' component={TransitionLogin} />
-        <Stack.Screen name='Login' component={LoginScreen} />
-        <Stack.Screen name="Sign Up" component={RegisterScreen} />
         <Stack.Screen name='Profile' component={ProfileScreen}/>
         <Stack.Screen name='Settings' component={SettingsScreen}/>
       </Stack.Navigator>
