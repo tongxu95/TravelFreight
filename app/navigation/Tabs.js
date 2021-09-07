@@ -42,9 +42,9 @@ function MyTabs() {
     >    
       <Tab.Screen name="Explore" component={FindScreen} />
       <Tab.Screen name="Favorite" component={FavScreen} />
-      <Tab.Screen name="Post" component={PostStack} />
+      <Tab.Screen name="Post" component={PostStack} options={{unmountOnBlur: true}}/>
       <Tab.Screen name="Chat" component={ChatScreen} />
-      <Tab.Screen name="Home" component={LoginStack} />    
+      <Tab.Screen name="Home" component={LoginStack} options={{unmountOnBlur: true}}/>    
     </Tab.Navigator>
   );
 } 

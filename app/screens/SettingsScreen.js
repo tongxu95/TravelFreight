@@ -68,9 +68,9 @@ function SettingsScreen( {navigation} ) {
                 </SettingsLayout>
             </GroupLayout>
             <GroupLayout>
-                <LogoutContainer onPress={() => {
+                <LogoutContainer onPress={async () => {
+                    await AsyncStorage.removeItem('@user');
                     navigation.navigate('Join Community');
-                    AsyncStorage.removeItem('@user');
                 }}>
                     <SettingsText>Log Out</SettingsText>
                 </LogoutContainer>

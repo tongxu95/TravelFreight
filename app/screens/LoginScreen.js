@@ -38,7 +38,7 @@ function LoginScreen({ navigation }) {
 
         axios.post(url, credentials).then((response) => {
             const {status, message, data} = response.data;
-            if (status != 'SUCCESSFUL') {
+            if (status != 'SUCCESS') {
                 handleMessage(message, status);
                 setSubmitting(false);
             } else {

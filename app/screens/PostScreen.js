@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Alert, View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { Formik } from 'formik';
 import { FontAwesome } from '@expo/vector-icons';
@@ -20,29 +20,48 @@ import {
 
 import axios from 'axios';
 
-function PostScreen(props) {
+function PostScreen({navigation, route}) {
+    const {_id, username, email, img, location} = route.params;
     const [choseCategory, setChoseCategory] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState();
 
-    const handleLogin = (credentials, setSubmitting, resetForm) => {
-        const url = 'https://secret-cove-40177.herokuapp.com/user/signin';
+    const handlePost = (data, setSubmitting, resetForm) => {
+        const url = 'https://secret-cove-40177.herokuapp.com/post/';
 
-        axios.post(url, credentials).then((response) => {
+        const today = new Date();
+        const posting = {
+            user: username,
+            ...data,
+            date: today
+        };
+        console.log(posting);
+        
+        axios.post(url, posting).then((response) => {
             const {status, message, data} = response.data;
-            if (status != 'SUCCESSFUL') {
-                handleMessage(message, status);
+            if (status != 'SUCCESS') {
+                createAlert(message, status);
                 setSubmitting(false);
             } else {
-                navigation.navigate('Profile', {...data[0]});
+                createAlert(message, status);
                 setSubmitting(false);
                 resetForm({ values: '' });
             }
         }).catch(err =>{
             console.log(err);
             setSubmitting(false);
-            handleMessage('An error occurred. Check you network and try again!', 'FAILED');
+            createAlert('An error occurred. Check you network and try again!', 'FAILED');
         })
     };
+
+    const createAlert = (message, status) => {
+        Alert.alert(
+            status,
+            message,
+            [
+                { text: "OK", onPress: () => console.log("OK Pressed") }
+            ]
+        );
+    }
 
     return (
         <PostContainer>
@@ -50,7 +69,7 @@ function PostScreen(props) {
                 <Formik
                     initialValues={{ category: '', title: '', description: '', location: '' }}
                     onSubmit={(values, {setSubmitting, resetForm}) => {
-                            handleSubmit(values, setSubmitting, resetForm);
+                            handlePost(values, setSubmitting, resetForm);
                     }}
                 >
                     {({ handleChange, handleBlur, handleSubmit, values, isSubmitting }) => (

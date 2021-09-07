@@ -3,7 +3,7 @@ import { useFocusEffect } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function Transition( {navigation} ) {
-    const [user, setUser] = useState({_id: '', email: '', img: '', location: '', username: '' });
+    let user;
 
     useFocusEffect(
         useCallback(() => {
@@ -11,11 +11,9 @@ function Transition( {navigation} ) {
             .then(user => {
                 if (user != null) {
                     user = JSON.parse(user);
-                    setUser(user);
-                    navigation.navigate('Post');
+                    navigation.navigate('Post', {...user});
                 } else {
-                    setUser({_id: '', email: '', img: '', location: '', username: '' });
-                    navigation.navigate('Join Community');
+                    navigation.navigate('Home');
                 }
             });
         }, [user])
